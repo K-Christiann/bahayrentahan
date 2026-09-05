@@ -1,0 +1,4 @@
+import { Component, type ErrorInfo, type ReactNode } from "react";
+import { CircleAlert, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+export class ErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> { state = { failed: false }; static getDerivedStateFromError() { return { failed: true }; } componentDidCatch(error: Error, info: ErrorInfo) { console.error("BahayRentahan UI error", error, info); } render() { if (this.state.failed) return <main className="fatal-state"><CircleAlert /><h1>BahayRentahan hit an unexpected error.</h1><p>Your saved data is safe. Reload the interface to try again.</p><Button className="lime-button" onClick={() => window.location.reload()}><RotateCcw /> Reload BahayRentahan</Button></main>; return this.props.children; } }
